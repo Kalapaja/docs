@@ -1,0 +1,14 @@
+@startuml
+
+node "Pilkki 2" {
+	portout "NFC flashing Tx"
+	port "Pilkki USB"
+	
+}
+
+frame "Pilkki 2 companion" {
+	port "USB"
+}
+
+@enduml
+

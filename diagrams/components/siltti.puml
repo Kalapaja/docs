@@ -1,0 +1,17 @@
+@startuml
+
+frame "Siltti" {
+	portin "Camera"
+	portout "Siltti Screen"
+	portout "NFC Tx"
+
+	database "Public addresses" {
+		(public address) <-> (derivation path)
+	}
+	
+	database "Chain specs" {
+		(chain name) -> (RPC addresses)
+	}
+}
+
+@enduml

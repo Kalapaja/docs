@@ -1,0 +1,12 @@
+@startuml
+
+frame "Client" {
+	portin "Client camera"
+	portout "Client screen"
+
+	database "Clients addresses" {
+	}
+}
+
+@enduml
+

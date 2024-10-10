@@ -1,0 +1,23 @@
+@startuml
+
+!include components/kampela.puml
+
+[Application] --> [Display driver] : bitmap screen
+[Touchscreen driver] --> [Application] : touch event
+[Application] --> [Memory access manager] : RAM r/w request
+[Application] ---> [Memory access manager] : Application persistent storage access request
+[Memory access manager] --> [Application] : Data response
+[System monitor] -> [Display driver] : Keepalive indication frame
+[Display driver] --> Screen
+Touch --> [Touchscreen driver]
+[External RAM driver] <--> RAM
+[Flash driver] <--> Flash
+"NFC Rx" --> "NFC collector"
+Seeds -up-> [Cryptography conveyor] : Decoding
+[Application] --> [Cryptography conveyor]
+[NFC collector] --> [External RAM driver]
+[External RAM driver] --> [Cryptography conveyor]
+[Cryptography conveyor] -up--> [Display driver]
+
+@enduml
+

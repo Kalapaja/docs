@@ -1,0 +1,15 @@
+@startuml
+
+!include components/kampela.puml
+!include components/siltti.puml
+!include components/pilkki.puml
+!include components/client.puml
+
+
+cloud RPC
+
+cloud Chain
+
+
+@enduml
+

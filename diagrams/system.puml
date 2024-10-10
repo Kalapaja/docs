@@ -1,0 +1,32 @@
+@startuml
+
+!include structure.puml
+
+' Relations between CPUs
+
+MCU1 <=left==> MCU0
+
+' peripherals
+
+MCU0 <-down-> Flash
+MCU0 <-down-> RAM
+"NFC Rx" -down-> MCU0
+Voltage -down-> MCU0
+Touch -> MCU0
+"NFC Rx" ..> "Capacitor bank"
+
+' Interdevice data flow
+
+RPC <===> Chain
+RPC <===> Client : RPC
+
+USB <===> "Pilkki USB"
+
+"NFC flashing Tx" .> "NFC Rx" : "Flashing user application"
+"NFC Tx" .> "NFC Rx"
+"Client screen" -down-> "Camera"
+Screen -> Camera
+Screen -down-> "Client camera"
+
+@enduml
+

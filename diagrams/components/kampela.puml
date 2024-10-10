@@ -1,0 +1,56 @@
+@startuml
+
+node "Kampela" {
+    frame "Application MCU" as MCU1 {
+        [Application]
+        [Application RAM]
+        [Application SE]
+        database "Encoded application keys"
+    }
+    
+    frame "Secure MCU" as MCU0 {
+        [Display driver]
+        [Touchscreen driver]
+        [Flash driver]
+        [External RAM driver]
+        [Memory access manager]
+        [Cryptography conveyor]
+        [System monitor]
+        [Secure Element]
+        [Clock]
+    }
+    portin "NFC Rx"
+    portin Touch
+    portout Screen
+	
+    folder "Memory" {
+        frame RAM {
+            database "NFC collector"
+            database "Application RAM space"
+        }
+        frame Flash {
+            database "Seeds"
+            database "Addresses"
+            database "Application storage"
+        }
+    }
+
+    folder "Power" {
+        [Capacitor bank]
+        portout "Voltage"
+    }
+}
+
+[Application SE] --0 "Encoded application keys" : symmetrically encoded
+[Secure Element] --0 Seeds : symmetrically encrypted
+[Application RAM] <-> [Application]
+[Application SE] <-> [Application]
+"Encoded application keys" ---> [Application RAM] : Decoding
+
+[Memory access manager] <-down-> [External RAM driver]
+[Memory access manager] <-down-> [Flash driver]
+Voltage -down-> [System monitor]
+[Clock] -up-> [System monitor]
+[Secure Element] <-right-> [Cryptography conveyor]
+
+@enduml
